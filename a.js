@@ -1,7 +1,7 @@
-class test {
+class test2 {
   getInfo() {
     return {
-      id: '123456789',
+      id: '2',
       name: 'jsonハックブロック',
       blocks: [
         {
@@ -67,9 +67,8 @@ class test {
     return JSON.stringify({ [args.key]: args.youso });
   };
   allvar(args){
-    const array = Object.values(JSON.parse(args)["variables"]);
-    return array.filter((_, index) => index % 2 === 0);
+    return ((Object.values(JSON.parse(args.json)["variables"])).flat(Infinity)).filter((_, index) => index % 2 === 0);
   };
 };
 
-Scratch.extensions.register(new test());
+Scratch.extensions.register(new test2());
