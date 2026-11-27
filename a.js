@@ -32,7 +32,7 @@ class test {
         },
         {
           opcode:'newjson',
-          BlockType: Scratch.BlockType.REPORTER,
+          blockType: Scratch.BlockType.REPORTER,
           text:'key [key] 要素 [youso] でjson生成',
           arguments:{
             key:{
@@ -54,7 +54,7 @@ class test {
     return (JSON.parse(args.blocks)[args.key])["opcode"];
   };
   newjson(args){
-    return `{"${args.key}":"${args.youso}"}`
+    return JSON.stringify({ [args.key]: args.youso });
   };
 };
 
