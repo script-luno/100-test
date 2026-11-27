@@ -1,7 +1,7 @@
-class test5 {
+class test6 {
   getInfo() {
     return {
-      id: '5',
+      id: '6',
       name: 'jsonハックブロックver5',
       blocks: [
         {
@@ -62,6 +62,22 @@ class test5 {
               type:Scratch.ArgumentType.STRING
             }
           }
+        },
+        {
+          opcode:'setvar',
+          blockType:Scratch.BlockType.REPORTER,
+          text:'json [json] の [name] を [new] に置き換える',
+          arguments:{
+            json:{
+              type:Scratch.ArgumentType.STRING
+            },
+            name:{
+              type:Scratch.ArgumentType.STRING
+            },
+            new:{
+              type:Scratch.ArgumentType.STRING
+            }
+          }
         }
       ]
     };
@@ -88,6 +104,12 @@ class test5 {
     };
     return ret;
   };
+  setvar(args){
+    return JSON.stringify({
+      ...JSON.parse(args.json),
+      [args.name]: JSON.parse(args.json)[args.name].with(0, args.new)
+    });
+  };
 };
 
-Scratch.extensions.register(new test5());
+Scratch.extensions.register(new test6());
