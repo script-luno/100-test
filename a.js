@@ -1,8 +1,8 @@
-class test2 {
+class test5 {
   getInfo() {
     return {
-      id: '2',
-      name: 'jsonハックブロック',
+      id: '5',
+      name: 'jsonハックブロックver5',
       blocks: [
         {
           opcode: 'joinjson',
@@ -52,6 +52,16 @@ class test2 {
               type:Scratch.ArgumentType.STRING
             }
           }
+        },
+        {
+          opcode:'alllist',
+          blockType:Scratch.BlockType.REPORTER,
+          text:'json [json] の全てのリスト名',
+          arguments:{
+            json:{
+              type:Scratch.ArgumentType.STRING
+            }
+          }
         }
       ]
     };
@@ -69,6 +79,15 @@ class test2 {
   allvar(args){
     return ((Object.values(JSON.parse(args.json)["variables"])).flat(Infinity)).filter((_, index) => index % 2 === 0);
   };
+  alllist(args){
+    const list = JSON.parse(args.json)["lists"];
+    const key = Object.keys(list);
+    let ret = [];
+    for(let i=0;i<key.length;i++){
+      ret.push(list[key[i]][0]);
+    };
+    return ret;
+  };
 };
 
-Scratch.extensions.register(new test2());
+Scratch.extensions.register(new test5());
