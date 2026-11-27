@@ -42,6 +42,16 @@ class test {
               type:Scratch.ArgumentType.STRING
             }
           }
+        },
+        {
+          opcode:'allvar',
+          blockType: Scratch.BlockType.REPORTER,
+          text:'json [json] の全ての変数名',
+          arguments:{
+            json:{
+              type:Scratch.ArgumentType.STRING
+            }
+          }
         }
       ]
     };
@@ -55,6 +65,10 @@ class test {
   };
   newjson(args){
     return JSON.stringify({ [args.key]: args.youso });
+  };
+  allvar(args){
+    const array = Object.values(JSON.parse(args)["variables"]);
+    return array.filter((_, index) => index % 2 === 0);
   };
 };
 
