@@ -1,8 +1,8 @@
-class test6 {
+class test23 {
   getInfo() {
     return {
-      id: '6',
-      name: 'jsonハックブロックver5',
+      id: '23',
+      name: 'jsonハックブロックv23',
       blocks: [
         {
           opcode: 'joinjson',
@@ -105,11 +105,13 @@ class test6 {
     return ret;
   };
   setvar(args){
+    const deta = ((Object.values(JSON.parse(args.json))).flat(Infinity)).filter((_, index) => index % 2 === 0);//並びを確認　正しいコード
+    const iti = Object.keys(JSON.parse(args.json))[deta.indexOf(args.name)];//位置を検索
     return JSON.stringify({
       ...JSON.parse(args.json),
-      [args.name]: JSON.parse(args.json)[args.name].with(0, args.new)
+      [iti]:JSON.parse(args.json)[iti].with(0,args.new)
     });
   };
 };
 
-Scratch.extensions.register(new test6());
+Scratch.extensions.register(new test23());
