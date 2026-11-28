@@ -1,8 +1,8 @@
-class test26 {
+class test27 {
   getInfo() {
     return {
-      id: 'jsonhack26',
-      name: 'jsonハックブロックv26',
+      id: 'jsonhack27',
+      name: 'jsonハックブロックv27',
       color1: '#07c9c6', // ブロック本体の色
       color2: '#08e3df', // 入力欄やドロップダウンの背景色
       color3: '#058381', // 枠線やメニューなどのアクセントカラー
@@ -81,6 +81,11 @@ class test26 {
               type:Scratch.ArgumentType.STRING
             }
           }
+        },
+        {
+          opcode:'setblock',
+          blockType:Scratch.BlockType.REPORTER,
+          text:'sensing_ofの変数名を元 [p'
         }
       ]
     };
@@ -96,7 +101,7 @@ class test26 {
     return JSON.stringify({ [args.key]: args.youso });
   };
   allvar(args){
-    return ((Object.values(JSON.parse(args.json)["variables"])).flat(Infinity)).filter((_, index) => index % 2 === 0);
+    return JSON.stringify(((Object.values(JSON.parse(args.json)["variables"])).flat(Infinity)).filter((_, index) => index % 2 === 0));
   };
   alllist(args){
     const list = JSON.parse(args.json)["lists"];
@@ -105,7 +110,7 @@ class test26 {
     for(let i=0;i<key.length;i++){
       ret.push(list[key[i]][0]);
     };
-    return ret;
+    return JSON.stringify(ret);
   };
   setvar(args){
     const iti = Object.keys(JSON.parse(args.json))[(((Object.values(JSON.parse(args.json))).flat(Infinity)).filter((_, index) => index % 2 === 0)).indexOf(args.name)];//位置を検索
@@ -116,4 +121,4 @@ class test26 {
   };
 };
 
-Scratch.extensions.register(new test26());
+Scratch.extensions.register(new test27());
