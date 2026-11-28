@@ -100,7 +100,6 @@
         ],
       };
     }
-
     joinjson(args) {
       return JSON.stringify({
         ...JSON.parse(args.jsonA),
@@ -142,11 +141,18 @@
       });
     }
     setblock(args) {
+      /** 
+      args.tableの書き方は、
+      {"stage":[{"English":"英語"}],"スプライト1":[{"English":"英語"}]}
+      のように書きます。
+      */
       let blocks = JSON.parse(args.blocks);
       const key = Object.keys(blocks);
       let sensing_of = []; //sensing_ofの位置(key)
       let sensing_of_ob_menu = []; //sensing_of_ob_menuの位置(key)
+      let sensing_of_ob_menu_parent = []; //sensing_of_ob_menuの対応ID
       let sensing_of_ob_menu_sprite = []; //対象スプライト
+      const table = JSON.parse(args.table);//変換表をobject型にして使用可能に
       console.log("成功!!");
       for (let i = 0; i < key.length; i++) {
         if (blocks[key[i]]["opcode"] == "sensing_of") {
@@ -168,14 +174,20 @@
             ].includes(blocks[key[i]]["fields"]["PROPERTY"][0])
           ) {
             sensing_of.push(key[i]);
-          }
+          };
         } else if (blocks[key[i]]["opcode"] == "sensing_of_object_menu") {
           sensing_of_ob_menu.push(blocks[key[i]]["parent"]);
           sensing_of_ob_menu_sprite.push(blocks[key[i]]["fields"]["OBJECT"][0]);
-        }
-      }
-    }
-  }
+          sensing_of_ob_menu_parent.push(blocks[key[i]]["parent"])
+        };
+      };
+      console.log(`コード読み取り完了。${sensing_of.length}ブロックのsensing_ofを発見しました`);
+      for(let i=0;i<sensing_of.length;i++){
+        blocks[sensing_of[i]]["fields"]["PROPERTY"] = args.table[sensing_of_ob_menu_sprite[sensing_of_ob_menu_parent.indexOf(sensing_of[i])]][blocks[sensing_of[i]]["fields"]["PROPERTY"]];//変数名を翻訳済みの変数名に変更
+      };
+      return blocks;
+    };
+  };
 
   Scratch.extensions.register(new test35());
 })(Scratch);
