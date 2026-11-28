@@ -1,8 +1,11 @@
-class test25 {
+class test26 {
   getInfo() {
     return {
-      id: 'jsonhack25',
-      name: 'jsonハックブロックv25',
+      id: 'jsonhack26',
+      name: 'jsonハックブロックv26',
+      color1: '#07c9c6', // ブロック本体の色
+      color2: '#08e3df', // 入力欄やドロップダウンの背景色
+      color3: '#058381', // 枠線やメニューなどのアクセントカラー
       blocks: [
         {
           opcode: 'joinjson',
@@ -66,7 +69,7 @@ class test25 {
         {
           opcode:'setvar',
           blockType:Scratch.BlockType.REPORTER,
-          text:'json [json] の [name] を [new] に置き換える',
+          text:'variables [json] の [name] を [new] に置き換える',
           arguments:{
             json:{
               type:Scratch.ArgumentType.STRING
@@ -113,4 +116,4 @@ class test25 {
   };
 };
 
-Scratch.extensions.register(new test25());
+Scratch.extensions.register(new test26());
