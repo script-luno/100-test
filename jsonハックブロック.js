@@ -1,11 +1,11 @@
 (function (Scratch) {
   "use strict";
-  class test35 {
+  class test51 {
     getInfo() {
       return {
-        id: "jsonhack35",
-        name: "jsonハックブロックv35",
-        color1: "#1183ca", // ブロック本体の色
+        id: "jsonhack51",
+        name: "jsonハックブロックv51",
+        color1: "#34ba19", // ブロック本体の色
         color2: "#08e3df", // 入力欄やドロップダウンの背景色
         color3: "#058381", // 枠線やメニューなどのアクセントカラー
         blocks: [
@@ -149,45 +149,39 @@
       let blocks = JSON.parse(args.blocks);
       const key = Object.keys(blocks);
       let sensing_of = []; //sensing_ofの位置(key)
-      let sensing_of_ob_menu = []; //sensing_of_ob_menuの位置(key)
-      let sensing_of_ob_menu_parent = []; //sensing_of_ob_menuの対応ID
-      let sensing_of_ob_menu_sprite = []; //対象スプライト
       const table = JSON.parse(args.table);//変換表をobject型にして使用可能に
+      const kouho =[
+                      "x position",
+                      "y position",
+                      "direction",
+                      "costume #",
+                      "costume name",
+                      "size",
+                      "backdrop #",
+                      "backdrop name",
+                      "volume",
+                      "background #",
+                      "background name",
+                      "volume",
+                      "tempo"
+                    ]
       console.log("成功!!");
       for (let i = 0; i < key.length; i++) {
         if (blocks[key[i]]["opcode"] == "sensing_of") {
-          if (
-            [
-              "x position",
-              "y position",
-              "direction",
-              "costume #",
-              "costume name",
-              "size",
-              "backdrop #",
-              "backdrop name",
-              "volume",
-              "background #",
-              "background name",
-              "volume",
-              "tempo",
-            ].includes(blocks[key[i]]["fields"]["PROPERTY"][0])
-          ) {
+          if (!kouho.includes(blocks[key[i]]["fields"]["PROPERTY"][0])) {
             sensing_of.push(key[i]);
           };
-        } else if (blocks[key[i]]["opcode"] == "sensing_of_object_menu") {
-          sensing_of_ob_menu.push(blocks[key[i]]["parent"]);
-          sensing_of_ob_menu_sprite.push(blocks[key[i]]["fields"]["OBJECT"][0]);
-          sensing_of_ob_menu_parent.push(blocks[key[i]]["parent"])
         };
       };
       console.log(`コード読み取り完了。${sensing_of.length}ブロックのsensing_ofを発見しました`);
-      for(let i=0;i<sensing_of.length;i++){
-        blocks[sensing_of[i]]["fields"]["PROPERTY"] = args.table[sensing_of_ob_menu_sprite[sensing_of_ob_menu_parent.indexOf(sensing_of[i])]][blocks[sensing_of[i]]["fields"]["PROPERTY"]];//変数名を翻訳済みの変数名に変更
+      let hensu = ""//変数名を入れる
+      let sprite = ""//スプライト内の変換表を表示
+      for (let index = 0; index < sensing_of.length; index++) {
+        
       };
       return blocks;
     };
   };
 
-  Scratch.extensions.register(new test35());
+  Scratch.extensions.register(new test51());
 })(Scratch);
