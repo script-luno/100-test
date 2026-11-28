@@ -177,7 +177,9 @@
       let hensu = ""//変数名を入れる
       let sprite = ""//スプライト内の変換表を表示
       for (let index = 0; index < sensing_of.length; index++) {
-        
+        hensu = blocks[sensing_of[index]]["fields"]["PROPERTY"][0]
+        sprite = table[blocks[blocks[sensing_of[index]]["inputs"]["OBJECT"][1]]["fields"]["OBJECT"][0]];
+        blocks[sensing_of[index]]["fields"]["PROPERTY"][0] = sprite[hensu];
       };
       return blocks;
     };
